@@ -1,0 +1,54 @@
+.header-component {
+  @apply flex justify-center fixed top-0 w-full px-8 py-4 bg-neutral-800 text-white text-sm;
+
+  &__nav {
+    @apply flex gap-x-20 items-center w-full max-w-[80rem];
+
+    .logo {
+      @apply flex items-center gap-x-2 font-bold uppercase whitespace-nowrap;
+
+      img {
+        @apply min-w-8 min-h-8 w-8 h-8;
+      }
+    }
+
+    .links {
+      @apply flex grow gap-x-12;
+
+      p {
+        @apply border-b border-transparent;
+
+        &:hover {
+          @apply cursor-pointer border-white transition duration-300;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .header-component {
+    &__nav {
+      @apply flex items-center justify-between;
+
+      .links {
+        @apply grow-0;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 680px) {
+  .header-component {
+    &__nav {
+      .logo {
+        @apply grow;
+      }
+
+      .links {
+        @apply hidden;
+      }
+    }
+  }
+}
+

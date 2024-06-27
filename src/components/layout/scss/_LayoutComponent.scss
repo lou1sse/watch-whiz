@@ -1,0 +1,11 @@
+.layout-component {
+  @apply flex flex-col;
+
+  .container {
+    @apply flex flex-col h-full w-full overflow-y-auto overflow-x-hidden;
+
+    main {
+      @apply p-8 flex self-center h-screen w-full max-w-[84rem] overflow-hidden;
+    }
+  }
+}
