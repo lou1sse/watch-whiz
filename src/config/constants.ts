@@ -1,3 +1,11 @@
+const API_URL = import.meta.env.VITE_API_URL
+const API_KEY = import.meta.env.VITE_API_KEY
+const POSTER_URL = import.meta.env.VITE_POSTER_URL
+
+const DEFAULT_HEADERS = {
+  "Content-Type": "application/json"
+}
+
 const HEADER_NAV_LINKS = [
   {
     label: "Home",
@@ -12,8 +20,8 @@ const HEADER_NAV_LINKS = [
     route: "/upcoming"
   },
   {
-    label: "Trending",
-    route: "/trending"
+    label: "Popular",
+    route: "/popular"
   }
 ]
 
@@ -23,8 +31,8 @@ const FOOTER_NAV_LINKS = [
     route: "/upcoming"
   },
   {
-    label: "Trending",
-    route: "/trending"
+    label: "Popular",
+    route: "/popular"
   },
   {
     label: "About",
@@ -47,4 +55,12 @@ const INFO_LINKS = [
   }
 ]
 
-export { HEADER_NAV_LINKS, FOOTER_NAV_LINKS, INFO_LINKS }
+export {
+  API_URL,
+  API_KEY,
+  POSTER_URL,
+  DEFAULT_HEADERS,
+  HEADER_NAV_LINKS,
+  FOOTER_NAV_LINKS,
+  INFO_LINKS
+}
