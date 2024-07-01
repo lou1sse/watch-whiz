@@ -1,0 +1,37 @@
+.top-rated-component {
+  @apply space-y-4;
+
+  .title {
+    @apply uppercase font-semibold;
+  }
+
+  .swiper {
+    &__item {
+      @apply space-y-2;
+
+      .text-wrapper {
+        @apply space-y-1;
+
+        p {
+          &.date {
+            @apply text-xs;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 580px) {
+  .top-rated-component {
+    .swiper {
+      &__item {
+        .text-wrapper {
+          p {
+            @apply text-sm;
+          }
+        }
+      }
+    }
+  }
+}

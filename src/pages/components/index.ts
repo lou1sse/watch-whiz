@@ -1,0 +1,5 @@
+export { default as GenreListComponent } from "./GenreListComponent"
+export { default as NowPlayingComponent } from "./NowPlayingComponent"
+export { default as PopularComponent } from "./PopularComponent"
+export { default as TopRatedComponent } from "./TopRatedComponent"
+export { default as UpcomingComponent } from "./UpcomingComponent"

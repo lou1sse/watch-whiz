@@ -1,0 +1,23 @@
+.popular-component {
+  @apply space-y-4;
+
+  .title {
+    @apply uppercase font-semibold;
+  }
+
+  .movies {
+    @apply grid grid-cols-3 gap-4;
+
+    &__item {
+      @apply space-y-2;
+    }
+  }
+}
+
+@media all and (max-width: 700px) {
+  .popular-component {
+    .movies {
+      @apply grid-cols-2 gap-2 text-sm;
+    }
+  }
+}
