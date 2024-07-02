@@ -31,9 +31,8 @@
       "@GlobalComponents": ["components/global"],
       "@LayoutComponents": ["components/layout"],
       "@Config": ["config"],
-      "@Hooks": ["hooks"],
-      "@Modules": ["modules"],
       "@Pages": ["pages"],
+      "@Store": ["store"],
       "@Utilities": ["utils"]
     }
   },

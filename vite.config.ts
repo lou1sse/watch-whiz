@@ -12,9 +12,8 @@ export default defineConfig({
       "@GlobalComponents": "/src/components/global",
       "@LayoutComponents": "/src/components/layout",
       "@Config": "/src/config",
-      "@Hooks": "/src/hooks",
-      "@Modules": "/src/modules",
       "@Pages": "/src/pages",
+      "@Store": "/src/store",
       "@Utilities": "/src/utils"
     }
   }
