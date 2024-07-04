@@ -11,8 +11,8 @@ export type APIRequestPayload = {
 
 export type FailResponse = {
   success: false,
-  message: string | null,
-  data?: unknown,
+  status_code: number,
+  status_message: string,
   error?: boolean
 }
 
