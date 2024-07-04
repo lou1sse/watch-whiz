@@ -1,7 +1,4 @@
-import { isEmpty } from "lodash-es"
-import { useEffect } from "react"
-
-import { useMovies } from "@Modules"
+import { MovieQueries } from "@Store"
 import {
   GenreListComponent,
   NowPlayingComponent,
@@ -12,48 +9,13 @@ import {
 import styles from "./scss/styles.module.scss"
 
 function HomePage() {
-  const {
-    genreList,
-    nowPlaying,
-    popular,
-    upcoming,
-    topRated,
-    genreListRequest,
-    nowPlayingRequest,
-    popularRequest,
-    upcomingRequest,
-    topRatedRequest
-  } = useMovies()
-
-  useEffect(() => {
-    if (isEmpty(genreList)) {
-      genreListRequest()
-    }
-  }, [genreList, genreListRequest])
-
-  useEffect(() => {
-    if (isEmpty(nowPlaying)) {
-      nowPlayingRequest()
-    }
-  }, [nowPlaying, nowPlayingRequest])
-
-  useEffect(() => {
-    if (isEmpty(popular)) {
-      popularRequest()
-    }
-  }, [popular, popularRequest])
-
-  useEffect(() => {
-    if (isEmpty(upcoming)) {
-      upcomingRequest()
-    }
-  }, [upcoming, upcomingRequest])
-
-  useEffect(() => {
-    if (isEmpty(topRated)) {
-      topRatedRequest()
-    }
-  }, [topRated, topRatedRequest])
+  const { useGenre, useNowPlaying, usePopular, useTopRated, useUpcoming } =
+    MovieQueries
+  const { genreList } = useGenre()
+  const { nowPlaying } = useNowPlaying()
+  const { popular } = usePopular()
+  const { topRated } = useTopRated()
+  const { upcoming } = useUpcoming()
 
   return (
     <div className={styles.homePage}>
