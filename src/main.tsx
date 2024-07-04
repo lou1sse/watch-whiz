@@ -6,7 +6,14 @@ import { RouterProvider } from "react-router-dom"
 import "./index.css"
 import router from "./router"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
