@@ -22,8 +22,10 @@ module.exports = {
       "warn",
       { allowConstantExport: true }
     ],
-    "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/require-default-props": 0,
+    "react/jsx-props-no-spreading": 0,
     "import/prefer-default-export": 0,
     "@typescript-eslint/no-namespace": 0,
     "prettier/prettier": [
