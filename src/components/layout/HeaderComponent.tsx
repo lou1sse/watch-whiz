@@ -1,8 +1,8 @@
-import { map } from "lodash-es"
-import { forwardRef } from "react"
 import { HEADER_NAV_LINKS } from "@Config"
 import { SearchComponent } from "@GlobalComponents"
 import { WatchWhizWhite } from "@Logo"
+import { map } from "lodash-es"
+import { forwardRef } from "react"
 import styles from "./scss/styles.module.scss"
 
 const HeaderComponent = forwardRef<HTMLDivElement>((_props, ref) => (
