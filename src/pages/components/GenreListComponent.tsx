@@ -1,9 +1,9 @@
+import { GenreItem } from "@Store"
 import { map } from "lodash-es"
-import { GenreListItem } from "@Modules"
 import styles from "./scss/styles.module.scss"
 
 type Props = {
-  data: GenreListItem[]
+  data: GenreItem[]
 }
 
 function GenreListComponent(props: Props) {
