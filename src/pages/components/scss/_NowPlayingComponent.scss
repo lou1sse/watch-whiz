@@ -1,4 +1,4 @@
-.now-playing-component {
+ .now-playing-component {
   @apply space-y-4;
 
   .title {
@@ -7,14 +7,12 @@
 
   .swiper {
     &__item {
-      @apply space-y-4;
-
       img {
         @apply relative;
       }
 
       .text-wrapper {
-        @apply absolute bottom-0 p-4 bg-gradient-to-t from-black to-transparent w-full h-full opacity-90 flex flex-col justify-end;
+        @apply absolute bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent w-full h-full opacity-90 flex flex-col justify-end;
       }
     }
   }
