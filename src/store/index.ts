@@ -1,2 +1,4 @@
-export { default as useMovies } from "./queries"
+export { default as useMovieStore } from "./state"
+
+export * from "./queries"
 export * from "./types"

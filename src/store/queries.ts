@@ -1,113 +1,152 @@
+import { getPosterURL, useCommonMethods } from "@Utilities"
 import { useQuery } from "react-query"
+import { useParams } from "react-router-dom"
 import {
+  getDetails,
   getGenreList,
   getNowPlaying,
   getPopular,
   getTopRated,
   getUpcoming
 } from "./requests"
-import useStore from "./state"
+import useMovieStore from "./state"
+import { MovieDetailsResponse } from "./types"
 
-function useMovies() {
-  const {
-    genreList,
-    nowPlaying,
-    popular,
-    upcoming,
-    topRated,
-    setGenreList,
-    setNowPlaying,
-    setPopular,
-    setUpcoming,
-    setTopRated
-  } = useStore()
+function useGenre() {
+  const { genreList, setGenreList } = useMovieStore()
 
-  const {
-    isLoading: isGenreListLoading,
-    error: genreListError,
-    refetch: genreListRequest
-  } = useQuery("genre_list", getGenreList, {
-    enabled: false,
-    onSuccess: (data) => {
-      setGenreList(data)
-    }
-  })
-
-  const {
-    isLoading: isNowPlayingLoading,
-    error: nowPlayingError,
-    refetch: nowPlayingRequest
-  } = useQuery("now_playing", getNowPlaying, {
-    enabled: false,
-    onSuccess: (data) => {
-      setNowPlaying(data)
-    }
-  })
-
-  const {
-    isLoading: isPopularLoading,
-    error: popularError,
-    refetch: popularRequest
-  } = useQuery("popular", getPopular, {
-    enabled: false,
-    onSuccess: (data) => {
-      setPopular(data)
-    }
-  })
-
-  const {
-    isLoading: isUpcomingLoading,
-    error: upcomingError,
-    refetch: upcomingRequest
-  } = useQuery("upcoming", getUpcoming, {
-    enabled: false,
-    onSuccess: (data) => {
-      setUpcoming(data)
-    }
-  })
-
-  const {
-    isLoading: isTopRatedLoading,
-    error: topRatedError,
-    refetch: topRatedRequest
-  } = useQuery("top_rated", getTopRated, {
-    enabled: false,
-    onSuccess: (data) => {
-      setTopRated(data)
-    }
-  })
+  const { isLoading: isGenreListLoading, error: genreListError } =
+    useQuery("genre_list", getGenreList, {
+      onSuccess: (data) => {
+        setGenreList(data)
+      }
+    })
 
   return {
-    /* genre list */
     isGenreListLoading,
     genreList,
-    genreListError,
-    genreListRequest,
-
-    /* now playing */
-    isNowPlayingLoading,
-    nowPlaying,
-    nowPlayingError,
-    nowPlayingRequest,
-
-    /* popular */
-    isPopularLoading,
-    popularError,
-    popular,
-    popularRequest,
-
-    /* upcoming */
-    isUpcomingLoading,
-    upcoming,
-    upcomingError,
-    upcomingRequest,
-
-    /* top rated */
-    isTopRatedLoading,
-    topRated,
-    topRatedError,
-    topRatedRequest
+    genreListError
   }
 }
 
-export default useMovies
+function useNowPlaying() {
+  const { nowPlaying, setNowPlaying } = useMovieStore()
+  const { updateResultsWithPosterUrls } = useCommonMethods()
+
+  const { isLoading: isNowPlayingLoading, error: nowPlayingError } =
+    useQuery("now_playing", getNowPlaying, {
+      onSuccess: (data) => {
+        const updatedResults = updateResultsWithPosterUrls(data.results)
+        setNowPlaying(updatedResults)
+      }
+    })
+
+  return {
+    isNowPlayingLoading,
+    nowPlaying,
+    nowPlayingError
+  }
+}
+
+function usePopular() {
+  const { popular, setPopular } = useMovieStore()
+  const { updateResultsWithPosterUrls } = useCommonMethods()
+
+  const { isLoading: isPopularLoading, error: popularError } = useQuery(
+    "popular",
+    getPopular,
+    {
+      onSuccess: (data) => {
+        const updatedResults = updateResultsWithPosterUrls(data.results, 6)
+        setPopular(updatedResults)
+      }
+    }
+  )
+
+  return {
+    isPopularLoading,
+    popular,
+    popularError
+  }
+}
+
+function useTopRated() {
+  const { topRated, setTopRated } = useMovieStore()
+  const { updateResultsWithPosterUrls } = useCommonMethods()
+
+  const { isLoading: isTopRatedLoading, error: topRatedError } = useQuery(
+    "top_rated",
+    getTopRated,
+    {
+      onSuccess: (data) => {
+        const updatedResults = updateResultsWithPosterUrls(data.results)
+        setTopRated(updatedResults)
+      }
+    }
+  )
+
+  return {
+    isTopRatedLoading,
+    topRated,
+    topRatedError
+  }
+}
+
+function useUpcoming() {
+  const { upcoming, setUpcoming } = useMovieStore()
+  const { updateResultsWithPosterUrls } = useCommonMethods()
+
+  const { isLoading: isUpcomingLoading, error: upcomingError } = useQuery(
+    "upcoming",
+    getUpcoming,
+    {
+      onSuccess: (data) => {
+        const updatedResults = updateResultsWithPosterUrls(data.results, 4)
+        setUpcoming(updatedResults)
+      }
+    }
+  )
+
+  return {
+    isUpcomingLoading,
+    upcoming,
+    upcomingError
+  }
+}
+
+function useDetails() {
+  const { details, setDetails } = useMovieStore()
+  const { movie_id: movieId } = useParams()
+
+  const { isLoading: isDetailsLoading, error: detailsError } = useQuery(
+    ["details", movieId],
+    () => getDetails(movieId),
+    {
+      enabled: !!movieId,
+      refetchOnMount: true,
+      onSuccess: (data) => {
+        const updatedData: MovieDetailsResponse = {
+          ...data,
+          backdrop_url: getPosterURL(data.backdrop_path),
+          poster_url: getPosterURL(data.poster_path)
+        }
+        setDetails(updatedData)
+      }
+    }
+  )
+
+  return {
+    isDetailsLoading,
+    details,
+    detailsError
+  }
+}
+
+export const MovieQueries = {
+  useGenre,
+  useNowPlaying,
+  usePopular,
+  useTopRated,
+  useUpcoming,
+  useDetails
+}
