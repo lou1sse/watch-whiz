@@ -1,0 +1,22 @@
+.movie-details-page {
+  @apply w-full relative;
+
+  &__content {
+    @apply flex flex-col gap-y-8 relative mt-[-15rem];
+    
+    .heading {
+      @apply grid grid-cols-11 gap-8;
+    }
+  }
+
+}
+
+@media all and (max-width: 1024px) {
+  .movie-details-page {
+    &__content {
+      .heading {
+        @apply flex flex-col gap-y-8;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.credits-component {
+  @apply flex flex-col gap-y-4 w-full;
+
+  &__description {
+    @apply space-y-2;
+
+    span {
+      @apply uppercase text-xs;
+    }
+  }
+
+  &__team {
+    @apply flex gap-1 flex-wrap;
+
+    .person {
+      @apply cursor-pointer py-1 px-2 bg-neutral-600 text-neutral-100 shadow rounded text-xs;
+    }
+  }
+}
