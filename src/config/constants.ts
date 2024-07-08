@@ -55,6 +55,21 @@ const INFO_LINKS = [
   }
 ]
 
+const MORE_DETAILS_TABS = [
+  {
+    id: "cast",
+    label: "Cast"
+  },
+  {
+    id: "crew",
+    label: "Crew"
+  },
+  {
+    id: "details",
+    label: "Details"
+  }
+]
+
 export {
   API_URL,
   API_KEY,
@@ -62,5 +77,6 @@ export {
   DEFAULT_HEADERS,
   HEADER_NAV_LINKS,
   FOOTER_NAV_LINKS,
-  INFO_LINKS
+  INFO_LINKS,
+  MORE_DETAILS_TABS
 }
