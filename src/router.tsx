@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 
 import { LayoutComponent } from "@LayoutComponents"
-import { HomePage } from "@Pages"
+import { HomePage, MovieDetailsPage } from "@Pages"
 
 const router = createBrowserRouter([
   {
@@ -11,6 +11,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />
+      },
+      {
+        path: "/movie/:movie_id",
+        element: <MovieDetailsPage />
       }
     ]
   }
