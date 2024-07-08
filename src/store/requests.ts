@@ -1,6 +1,8 @@
 import { API } from "@APIService"
 import {
   GenreListResponse,
+  LanguageItem,
+  MovieCreditsResponse,
   MovieDetailsResponse,
   MoviesListResponse
 } from "./types"
@@ -93,9 +95,39 @@ async function getDetails(id: string | undefined) {
   }
 }
 
+async function getCredits(id: string | undefined) {
+  const endpoint = `movie/${id}/credits`
+
+  try {
+    const response = await API.request<MovieCreditsResponse>({
+      method: "get",
+      endpoint
+    })
+    return response.data
+  } catch (error) {
+    throw new Error(`Failed to get data from ${endpoint}.`)
+  }
+}
+
+async function getLanguages() {
+  const endpoint = "configuration/languages"
+
+  try {
+    const response = await API.request<LanguageItem[]>({
+      method: "get",
+      endpoint
+    })
+    return response.data
+  } catch (error) {
+    throw new Error(`Failed to get data from ${endpoint}.`)
+  }
+}
+
 export {
+  getCredits,
   getDetails,
   getGenreList,
+  getLanguages,
   getNowPlaying,
   getPopular,
   getTopRated,
