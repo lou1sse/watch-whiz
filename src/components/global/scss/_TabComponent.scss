@@ -1,0 +1,19 @@
+.tab-component {
+  @apply flex gap-x-8 w-full text-sm uppercase relative;
+
+  &__border {
+    @apply absolute bottom-0 w-full border-t border-neutral-600 z-0;
+  }
+
+  p {
+    @apply text-yellow-500 border-b pb-2 border-transparent;
+
+    &.selected {
+      @apply text-white font-semibold border-white;
+    }
+
+    &:not(.selected):hover {
+      @apply border-yellow-500;
+    }
+  }
+}
