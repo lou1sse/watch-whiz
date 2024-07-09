@@ -5,36 +5,17 @@ import { useParams } from "react-router-dom"
 import {
   getCredits,
   getDetails,
-  getGenreList,
-  getLanguages,
   getNowPlaying,
   getPopular,
   getTopRated,
   getUpcoming
 } from "./requests"
-import useMovieStore from "./state"
+import useMovieStore from "./store"
 import {
   CrewItem,
   MovieCreditsResponse,
   MovieDetailsResponse
 } from "./types"
-
-function useGenre() {
-  const { genreList, setGenreList } = useMovieStore()
-
-  const { isLoading: isGenreListLoading, error: genreListError } =
-    useQuery("genre_list", getGenreList, {
-      onSuccess: (data) => {
-        setGenreList(data)
-      }
-    })
-
-  return {
-    isGenreListLoading,
-    genreList,
-    genreListError
-  }
-}
 
 function useNowPlaying() {
   const { nowPlaying, setNowPlaying } = useMovieStore()
@@ -122,28 +103,18 @@ function useUpcoming() {
 }
 
 function useDetails() {
-  const { details, credits, languages, setDetails, setCredits } =
-    useMovieStore()
+  const { details, credits, setDetails, setCredits } = useMovieStore()
   const { movie_id: movieId } = useParams()
 
   const queries = useQueries([
     {
-      queryKey: ["details", movieId, credits, languages],
-      queryFn: () => getDetails(movieId),
+      queryKey: ["details", movieId],
+      queryFn: () => getDetails(movieId as string),
       enabled: !!movieId,
       refetchOnMount: true,
       onSuccess: (data: MovieDetailsResponse) => {
-        const director =
-          find(credits.crew, { job: "Director" }) || ({} as CrewItem)
-        const languageName =
-          find(
-            languages,
-            (item) => item.iso_639_1 === data.original_language
-          )?.english_name || ""
         const updatedData = {
           ...data,
-          director,
-          original_language_name: languageName,
           backdrop_url: getPosterURL(data.backdrop_path),
           poster_url: getPosterURL(data.poster_path)
         }
@@ -152,10 +123,13 @@ function useDetails() {
     },
     {
       queryKey: ["credits", movieId],
-      queryFn: () => getCredits(movieId),
+      queryFn: () => getCredits(movieId as string),
       enabled: !!movieId,
       refetchOnMount: true,
       onSuccess: (data: MovieCreditsResponse) => {
+        const director =
+          find(data.crew, { job: "Director" }) || ({} as CrewItem)
+        setDetails({ ...details, director })
         setCredits(data)
       }
     }
@@ -174,23 +148,10 @@ function useDetails() {
   }
 }
 
-function useLanguages() {
-  const { details, setLanguages } = useMovieStore()
-
-  useQuery(["languages", details], getLanguages, {
-    enabled: !!details,
-    onSuccess: (data) => {
-      setLanguages(data)
-    }
-  })
-}
-
 export const MovieQueries = {
-  useGenre,
   useNowPlaying,
   usePopular,
   useTopRated,
   useUpcoming,
-  useDetails,
-  useLanguages
+  useDetails
 }

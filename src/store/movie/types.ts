@@ -1,17 +1,5 @@
-export type GenreItem = {
-  id: number,
-  name: string
-}
-
-export type GenreListResponse = {
-  genres: GenreItem[]
-}
-
-export type LanguageItem = {
-  iso_639_1: string,
-  english_name: string,
-  name: string
-}
+import { GenreItem } from "store/genre"
+import { LanguageItem } from "../configuration"
 
 export type Pagination = {
   page: number,
@@ -58,7 +46,6 @@ export type MovieDetailsResponse = {
   imdb_id: string,
   origin_country: string[],
   original_language: string,
-  original_language_name: string,
   original_title: string,
   overview: string,
   popularity: number,
@@ -123,20 +110,16 @@ export type MovieCreditsResponse = {
 }
 
 export type MoviesState = {
-  genreList: GenreItem[],
   nowPlaying: MovieItem[],
   popular: MovieItem[],
   upcoming: MovieItem[],
   topRated: MovieItem[],
   details: MovieDetailsResponse,
   credits: MovieCreditsResponse,
-  languages: LanguageItem[],
-  setGenreList: (data: GenreItem[]) => void,
   setNowPlaying: (data: MovieItem[]) => void,
   setPopular: (data: MovieItem[]) => void,
   setUpcoming: (data: MovieItem[]) => void,
   setTopRated: (data: MovieItem[]) => void,
   setDetails: (data: MovieDetailsResponse) => void,
-  setCredits: (data: MovieCreditsResponse) => void,
-  setLanguages: (data: LanguageItem[]) => void
+  setCredits: (data: MovieCreditsResponse) => void
 }
