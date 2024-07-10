@@ -1,0 +1,15 @@
+.tooltip-component {
+  @apply absolute top-[-2.25rem] w-full z-50 flex justify-center;
+
+  &__content {
+    @apply relative w-max text-xs px-2 py-1.5 rounded bg-neutral-500 text-neutral-200 shadow-lg;
+    
+    p {
+      @apply font-semibold truncate;
+    }
+
+    svg {
+      @apply absolute top-full left-1/2 -translate-x-1/2 fill-neutral-500 shadow-lg;
+    }
+  }
+}
