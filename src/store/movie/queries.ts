@@ -20,8 +20,11 @@ import {
 } from "./types"
 
 function useNowPlaying() {
-  const { nowPlaying, setNowPlaying } = useMovieStore()
   const { updateResultsWithPosterUrls } = useCommonMethods()
+  const { nowPlaying, setNowPlaying } = useMovieStore((state) => ({
+    nowPlaying: state.nowPlaying,
+    setNowPlaying: state.setNowPlaying
+  }))
 
   const { isLoading: isNowPlayingLoading, error: nowPlayingError } =
     useQuery("now_playing", getNowPlaying, {
@@ -39,8 +42,11 @@ function useNowPlaying() {
 }
 
 function usePopular() {
-  const { popular, setPopular } = useMovieStore()
   const { updateResultsWithPosterUrls } = useCommonMethods()
+  const { popular, setPopular } = useMovieStore((state) => ({
+    popular: state.popular,
+    setPopular: state.setPopular
+  }))
 
   const { isLoading: isPopularLoading, error: popularError } = useQuery(
     "popular",
@@ -61,8 +67,11 @@ function usePopular() {
 }
 
 function useTopRated() {
-  const { topRated, setTopRated } = useMovieStore()
   const { updateResultsWithPosterUrls } = useCommonMethods()
+  const { topRated, setTopRated } = useMovieStore((state) => ({
+    topRated: state.topRated,
+    setTopRated: state.setTopRated
+  }))
 
   const { isLoading: isTopRatedLoading, error: topRatedError } = useQuery(
     "top_rated",
@@ -83,8 +92,11 @@ function useTopRated() {
 }
 
 function useUpcoming() {
-  const { upcoming, setUpcoming } = useMovieStore()
   const { updateResultsWithPosterUrls } = useCommonMethods()
+  const { upcoming, setUpcoming } = useMovieStore((state) => ({
+    upcoming: state.upcoming,
+    setUpcoming: state.setUpcoming
+  }))
 
   const { isLoading: isUpcomingLoading, error: upcomingError } = useQuery(
     "upcoming",
@@ -113,7 +125,14 @@ function useDetails() {
     setDetails,
     setCredits,
     setAlternativeTitles
-  } = useMovieStore()
+  } = useMovieStore((state) => ({
+    details: state.details,
+    credits: state.credits,
+    alternativeTitles: state.alternativeTitles,
+    setDetails: state.setDetails,
+    setCredits: state.setCredits,
+    setAlternativeTitles: state.setAlternativeTitles
+  }))
 
   const queries = useQueries([
     {

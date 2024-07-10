@@ -3,7 +3,10 @@ import { getCountries, getLanguages } from "./requests"
 import useConfigurationStore from "./store"
 
 function useCountries() {
-  const { countries, setCountries } = useConfigurationStore()
+  const { countries, setCountries } = useConfigurationStore((state) => ({
+    countries: state.countries,
+    setCountries: state.setCountries
+  }))
 
   const { isLoading: isCountriesLoading, error: countriesError } =
     useQuery("countries", getCountries, {
@@ -20,7 +23,10 @@ function useCountries() {
 }
 
 function useLanguages() {
-  const { languages, setLanguages } = useConfigurationStore()
+  const { languages, setLanguages } = useConfigurationStore((state) => ({
+    languages: state.languages,
+    setLanguages: state.setLanguages
+  }))
 
   const { isLoading: isLanguagesLoading, error: languagesError } =
     useQuery("languages", getLanguages, {

@@ -4,7 +4,10 @@ import type { MovieDetailsResponse } from "../movie"
 import useConfigurationStore from "./store"
 
 function useConfigurationUtilities(details: MovieDetailsResponse) {
-  const { countries, languages } = useConfigurationStore()
+  const { countries, languages } = useConfigurationStore((state) => ({
+    countries: state.countries,
+    languages: state.languages
+  }))
 
   const countryNames = useMemo(
     () =>
