@@ -1,10 +1,25 @@
-import { find } from "lodash-es"
-import { useMemo } from "react"
 import { useQuery } from "react-query"
-import { getLanguages } from "./requests"
+import { getCountries, getLanguages } from "./requests"
 import useConfigurationStore from "./store"
 
-function useLanguages(original_language?: string) {
+function useCountries() {
+  const { countries, setCountries } = useConfigurationStore()
+
+  const { isLoading: isCountriesLoading, error: countriesError } =
+    useQuery("countries", getCountries, {
+      onSuccess: (data) => {
+        setCountries(data)
+      }
+    })
+
+  return {
+    isCountriesLoading,
+    countries,
+    countriesError
+  }
+}
+
+function useLanguages() {
   const { languages, setLanguages } = useConfigurationStore()
 
   const { isLoading: isLanguagesLoading, error: languagesError } =
@@ -14,20 +29,11 @@ function useLanguages(original_language?: string) {
       }
     })
 
-  const originalLanguageName = useMemo(() => {
-    const languageName = find(
-      languages,
-      (item) => item.iso_639_1 === original_language
-    )?.english_name
-    return languageName || ""
-  }, [languages, original_language])
-
   return {
     isLanguagesLoading,
     languages,
-    languagesError,
-    originalLanguageName
+    languagesError
   }
 }
 
-export const ConfigurationQueries = { useLanguages }
+export const ConfigurationQueries = { useCountries, useLanguages }
