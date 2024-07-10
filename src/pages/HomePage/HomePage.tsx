@@ -1,4 +1,4 @@
-import { MovieQueries } from "@Store"
+import { GenreQueries, MovieQueries } from "@Store"
 import {
   GenreListComponent,
   NowPlayingComponent,
@@ -9,9 +9,11 @@ import {
 import styles from "./scss/styles.module.scss"
 
 function HomePage() {
-  const { useGenre, useNowPlaying, usePopular, useTopRated, useUpcoming } =
+  const { useMovieGenres } = GenreQueries
+  const { useNowPlaying, usePopular, useTopRated, useUpcoming } =
     MovieQueries
-  const { genreList } = useGenre()
+
+  const { movieGenres } = useMovieGenres()
   const { nowPlaying } = useNowPlaying()
   const { popular } = usePopular()
   const { topRated } = useTopRated()
@@ -19,7 +21,7 @@ function HomePage() {
 
   return (
     <div className={styles.homePage}>
-      <GenreListComponent data={genreList} />
+      <GenreListComponent data={movieGenres} />
       <div className={styles.homePage__content}>
         <div className={styles.main}>
           <NowPlayingComponent data={nowPlaying} />
