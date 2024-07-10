@@ -2,10 +2,10 @@
   @apply w-full relative;
 
   &__content {
-    @apply flex flex-col gap-y-8 relative mt-[-15rem];
+    @apply grid grid-cols-11 gap-8 relative mt-[-15rem];
     
-    .heading {
-      @apply grid grid-cols-11 gap-8;
+    .overview {
+      @apply col-span-8 flex flex-col gap-y-8 p-0 m-0;
     }
   }
 
@@ -14,9 +14,7 @@
 @media all and (max-width: 1024px) {
   .movie-details-page {
     &__content {
-      .heading {
-        @apply flex flex-col gap-y-8;
-      }
+      @apply flex flex-col gap-y-8;
     }
   }
 }
