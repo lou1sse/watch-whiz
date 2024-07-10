@@ -109,6 +109,17 @@ export type MovieCreditsResponse = {
   crew: CrewItem[]
 }
 
+export type TitleItem = {
+  iso_3166_1: string,
+  title: string,
+  type: string
+}
+
+export type AlternativeTitlesResponse = {
+  id: number,
+  titles: TitleItem[]
+}
+
 export type MoviesState = {
   nowPlaying: MovieItem[],
   popular: MovieItem[],
@@ -116,10 +127,12 @@ export type MoviesState = {
   topRated: MovieItem[],
   details: MovieDetailsResponse,
   credits: MovieCreditsResponse,
+  alternativeTitles: TitleItem[],
   setNowPlaying: (data: MovieItem[]) => void,
   setPopular: (data: MovieItem[]) => void,
   setUpcoming: (data: MovieItem[]) => void,
   setTopRated: (data: MovieItem[]) => void,
   setDetails: (data: MovieDetailsResponse) => void,
-  setCredits: (data: MovieCreditsResponse) => void
+  setCredits: (data: MovieCreditsResponse) => void,
+  setAlternativeTitles: (data: TitleItem[]) => void
 }

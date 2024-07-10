@@ -3,7 +3,8 @@ import {
   MovieCreditsResponse,
   MovieDetailsResponse,
   MovieItem,
-  MoviesState
+  MoviesState,
+  TitleItem
 } from "./types"
 
 const useMovieStore = create<MoviesState>((set) => ({
@@ -13,6 +14,7 @@ const useMovieStore = create<MoviesState>((set) => ({
   topRated: [] as MovieItem[],
   details: {} as MovieDetailsResponse,
   credits: {} as MovieCreditsResponse,
+  alternativeTitles: [] as TitleItem[],
 
   /* actions */
   setNowPlaying: (nowPlaying) => set({ nowPlaying }),
@@ -20,7 +22,8 @@ const useMovieStore = create<MoviesState>((set) => ({
   setUpcoming: (upcoming) => set({ upcoming }),
   setTopRated: (topRated) => set({ topRated }),
   setDetails: (details) => set({ details }),
-  setCredits: (credits) => set({ credits })
+  setCredits: (credits) => set({ credits }),
+  setAlternativeTitles: (alternativeTitles) => set({ alternativeTitles })
 }))
 
 export default useMovieStore

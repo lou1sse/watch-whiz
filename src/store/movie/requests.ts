@@ -1,5 +1,6 @@
 import { generateRequest } from "@APIService"
 import {
+  AlternativeTitlesResponse,
   MovieCreditsResponse,
   MovieDetailsResponse,
   MoviesListResponse
@@ -13,7 +14,8 @@ const ENDPOINTS = {
   TopRated: `${PREFIX}/top_rated`,
   Upcoming: `${PREFIX}/upcoming`,
   Details: (id: string) => `${PREFIX}/${id}`,
-  Credits: (id: string) => `${PREFIX}/${id}/credits`
+  Credits: (id: string) => `${PREFIX}/${id}/credits`,
+  AlternativeTitles: (id: string) => `${PREFIX}/${id}/alternative_titles`
 }
 
 function getNowPlaying() {
@@ -27,9 +29,7 @@ function getPopular() {
   return generateRequest<MoviesListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Popular,
-    params: {
-      page: 2
-    }
+    params: { page: 2 }
   })
 }
 
@@ -61,11 +61,19 @@ function getCredits(id: string) {
   })
 }
 
+function getAlternativeTitles(id: string) {
+  return generateRequest<AlternativeTitlesResponse>({
+    method: "get",
+    endpoint: ENDPOINTS.AlternativeTitles(id)
+  })
+}
+
 export {
   getCredits,
   getDetails,
   getNowPlaying,
   getPopular,
   getTopRated,
-  getUpcoming
+  getUpcoming,
+  getAlternativeTitles
 }

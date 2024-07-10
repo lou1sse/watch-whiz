@@ -1,8 +1,9 @@
 import { getPosterURL, useCommonMethods } from "@Utilities"
-import { find } from "lodash-es"
+import { find, isEmpty } from "lodash-es"
 import { useQueries, useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import {
+  getAlternativeTitles,
   getCredits,
   getDetails,
   getNowPlaying,
@@ -12,6 +13,7 @@ import {
 } from "./requests"
 import useMovieStore from "./store"
 import {
+  AlternativeTitlesResponse,
   CrewItem,
   MovieCreditsResponse,
   MovieDetailsResponse
@@ -103,8 +105,15 @@ function useUpcoming() {
 }
 
 function useDetails() {
-  const { details, credits, setDetails, setCredits } = useMovieStore()
   const { movie_id: movieId } = useParams()
+  const {
+    details,
+    credits,
+    alternativeTitles,
+    setDetails,
+    setCredits,
+    setAlternativeTitles
+  } = useMovieStore()
 
   const queries = useQueries([
     {
@@ -124,19 +133,31 @@ function useDetails() {
     {
       queryKey: ["credits", movieId],
       queryFn: () => getCredits(movieId as string),
-      enabled: !!movieId,
-      refetchOnMount: true,
+      enabled: !!movieId && isEmpty(details.director),
       onSuccess: (data: MovieCreditsResponse) => {
         const director =
           find(data.crew, { job: "Director" }) || ({} as CrewItem)
         setDetails({ ...details, director })
         setCredits(data)
       }
+    },
+    {
+      queryKey: ["alternative_titles", movieId],
+      queryFn: () => getAlternativeTitles(movieId as string),
+      enabled: !!movieId,
+      refetchOnMount: true,
+      onSuccess: (data: AlternativeTitlesResponse) => {
+        setAlternativeTitles(data.titles)
+      }
     }
   ])
 
   const { isLoading: isDetailsLoading, error: detailsError } = queries[0]
   const { isLoading: isCreditsLoading, error: creditsError } = queries[1]
+  const {
+    isLoading: isAlternativeTitlesLoading,
+    error: alternativeTitlesError
+  } = queries[2]
 
   return {
     isDetailsLoading,
@@ -144,7 +165,10 @@ function useDetails() {
     detailsError,
     isCreditsLoading,
     credits,
-    creditsError
+    creditsError,
+    isAlternativeTitlesLoading,
+    alternativeTitles,
+    alternativeTitlesError
   }
 }
 
