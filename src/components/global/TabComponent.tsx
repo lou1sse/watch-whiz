@@ -9,7 +9,7 @@ type Props<T extends TabItem> = {
   tabs: T[],
   tabItemIdKey?: keyof T,
   tabItemLabelKey?: keyof T,
-  defaultTabId?: keyof T,
+  defaultTabId?: T[keyof T],
   onChangeTab?: (item: keyof T) => void
 }
 
