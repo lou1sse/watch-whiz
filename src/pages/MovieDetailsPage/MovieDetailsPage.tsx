@@ -1,5 +1,6 @@
 import { ConfigurationQueries, MovieQueries } from "@Store"
 import { useWindowSize } from "@uidotdev/usehooks"
+import classNames from "classnames"
 import {
   BackdropComponent,
   CreditsComponent,
@@ -23,18 +24,24 @@ function MovieDetailsPage() {
   useLanguages()
   useCountries()
 
+  const contentClass = classNames(styles.movieDetailsPage__content, {
+    [styles.withMargin]: !!details.backdrop_path
+  })
+
   if (isDetailsLoading || isCreditsLoading || isAlternativeTitlesLoading)
     return "Loading..."
 
   return (
     <div className={styles.movieDetailsPage}>
-      <BackdropComponent image={details.backdrop_url} />
-      <div className={styles.movieDetailsPage__content}>
+      {!!details.backdrop_path && (
+        <BackdropComponent image={details.backdrop_url} />
+      )}
+      <div className={contentClass}>
         <div className={styles.overview}>
           <TitleComponent />
-          {(width as number) <= 850 && <CreditsComponent />}
+          {(width || 0) <= 850 && <CreditsComponent />}
         </div>
-        {(width as number) > 1024 && <SummaryComponent />}
+        {(width || 0) > 1024 && <SummaryComponent />}
       </div>
     </div>
   )
