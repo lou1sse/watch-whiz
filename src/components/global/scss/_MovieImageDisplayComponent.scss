@@ -1,0 +1,27 @@
+.movie-image-display-component {
+  @apply w-full relative;
+
+  img {
+    @apply object-cover w-full h-full;
+  }
+
+  .placeholder {
+    @apply absolute inset-0 bg-neutral-800 border-2 border-neutral-700;
+    @apply flex flex-col justify-center items-center w-full h-full;
+
+    &.overlay {
+      @apply opacity-90 border-none;
+    }
+
+    p {
+      @apply px-4 text-sm text-center w-full;
+      
+      &.title {
+        @apply text-lg font-semibold overflow-hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; 
+      }
+    }
+  }
+}
