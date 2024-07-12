@@ -1,11 +1,8 @@
 import { MovieItem } from "@Store"
 import { map } from "lodash-es"
-import { useNavigate } from "react-router-dom"
 import { getPosterURL } from "./image"
 
 function useCommonMethods() {
-  const navigate = useNavigate()
-
   const updateResultsWithPosterUrls = (
     data: MovieItem[],
     displayLength?: number
@@ -22,14 +19,7 @@ function useCommonMethods() {
     return updatedData
   }
 
-  const onClickMovieItem = (id: number) => {
-    navigate(`/movie/${id}`)
-  }
-
-  return {
-    updateResultsWithPosterUrls,
-    onClickMovieItem
-  }
+  return { updateResultsWithPosterUrls }
 }
 
 export { useCommonMethods }
