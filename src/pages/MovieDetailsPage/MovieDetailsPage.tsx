@@ -1,6 +1,7 @@
 import { ConfigurationQueries, MovieQueries } from "@Store"
 import { useWindowSize } from "@uidotdev/usehooks"
 import classNames from "classnames"
+import { MovieListComponent } from "@CompoundComponents"
 import {
   BackdropComponent,
   CreditsComponent,
@@ -18,7 +19,8 @@ function MovieDetailsPage() {
     isDetailsLoading,
     isCreditsLoading,
     isAlternativeTitlesLoading,
-    details
+    details,
+    similar
   } = useDetails()
 
   useLanguages()
@@ -40,6 +42,18 @@ function MovieDetailsPage() {
         <div className={styles.overview}>
           <TitleComponent />
           {(width || 0) <= 850 && <CreditsComponent />}
+          <MovieListComponent data={similar}>
+            <MovieListComponent.Header title="Similar Films" />
+            <MovieListComponent.Swiper>
+              {({ movie }) => (
+                <MovieListComponent.Item
+                  data={movie}
+                  hideCaption
+                  enableHoverEffect
+                />
+              )}
+            </MovieListComponent.Swiper>
+          </MovieListComponent>
         </div>
         {(width || 0) > 1024 && <SummaryComponent />}
       </div>
