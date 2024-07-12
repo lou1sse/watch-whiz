@@ -13,6 +13,7 @@ type Props = PropsWithChildren<{
   width?: string,
   height?: string,
   isBackdrop?: boolean,
+  hideCaption?: boolean,
   enableHoverEffect?: boolean
 }>
 
@@ -51,18 +52,20 @@ function Item(props: ItemProps) {
 
 function MovieListItemComponent(props: Props) {
   const data = useMovieListContext()
-  const { children, data: propsData, ...rest } = props
+  const { children, data: propsData, hideCaption, ...rest } = props
 
   if (propsData)
     return (
       <Item data={propsData} {...rest}>
-        {children || <MovieListItemCaptionComponent data={propsData} />}
+        {!hideCaption &&
+          (children || <MovieListItemCaptionComponent data={propsData} />)}
       </Item>
     )
 
   return map(data, (item) => (
     <Item key={item.id} data={item} {...rest}>
-      {children || <MovieListItemCaptionComponent data={item} />}
+      {!hideCaption &&
+        (children || <MovieListItemCaptionComponent data={item} />)}
     </Item>
   ))
 }
