@@ -1,37 +1,9 @@
 .upcoming-component {
-  @apply flex flex-col gap-y-4;
-
-  .title {
-    @apply uppercase font-semibold;
-  }
-
-  .movies {
-    @apply flex flex-col gap-y-4;
-
-    &__item {
-      @apply space-y-2;
-
-      .text-wrapper {
-        .date {
-          @apply text-xs;
-        }
-      }
-    }
-  }
+  @apply flex flex-col gap-y-6;
 }
 
 @media all and (max-width: 1024px) {
   .upcoming-component {
-    .movies {
-      @apply grid grid-cols-2 gap-4 text-sm;
-    }
-  }
-}
-
-@media all and (max-width: 700px) {
-  .upcoming-component {
-    .movies {
-      @apply gap-2;
-    }
+    @apply grid grid-cols-2 gap-3 text-sm;
   }
 }

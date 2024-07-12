@@ -1,33 +1,18 @@
-import { ClickableDivComponent } from "@GlobalComponents"
+import { MovieListComponent } from "@CompoundComponents"
 import { MovieItem } from "@Store"
-import { useCommonMethods } from "@Utilities"
-import { map } from "lodash-es"
 import styles from "./scss/styles.module.scss"
 
-type Props = {
-  data: MovieItem[]
-}
-
-function PopularComponent(props: Props) {
-  const { data } = props
-  const { onClickMovieItem } = useCommonMethods()
-
+function PopularComponent({ data }: { data: MovieItem[] }) {
   return (
-    <div className={styles.popularComponent}>
-      <p className={styles.title}>Popular Now</p>
-      <div className={styles.movies}>
-        {map(data, (item) => (
-          <ClickableDivComponent
-            key={item.id}
-            className={styles.movies__item}
-            onClick={() => onClickMovieItem(item.id)}
-          >
-            <img src={item.backdrop_url} alt={`${item.title} Poster`} />
-            <p>{item.title}</p>
-          </ClickableDivComponent>
-        ))}
-      </div>
-    </div>
+    <MovieListComponent data={data}>
+      <MovieListComponent.Header
+        title="Popular Now"
+        actionRoute="/popular"
+      />
+      <MovieListComponent.Items className={styles.popularComponent}>
+        <MovieListComponent.Item isBackdrop height="160px" />
+      </MovieListComponent.Items>
+    </MovieListComponent>
   )
 }
 
