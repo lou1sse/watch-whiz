@@ -28,6 +28,7 @@
     "paths": {
       "@Logo": ["assets/logo"],
       "@APIService": ["api"],
+      "@CompoundComponents": ["components/compound"],
       "@GlobalComponents": ["components/global"],
       "@LayoutComponents": ["components/layout"],
       "@Config": ["config"],

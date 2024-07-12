@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       "@Logo": "/src/assets/logo",
       "@APIService": "/src/api",
+      "@CompoundComponents": "/src/components/compound",
       "@GlobalComponents": "/src/components/global",
       "@LayoutComponents": "/src/components/layout",
       "@Config": "/src/config",
