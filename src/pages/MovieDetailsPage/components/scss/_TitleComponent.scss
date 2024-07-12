@@ -1,14 +1,6 @@
 .title-component {
   @apply col-span-8 flex gap-x-8;
 
-  &__poster {
-    @apply min-w-[100px] max-w-[15rem] shrink-0 w-full;
-
-    img {
-      @apply w-full h-max object-cover;
-    }
-  }
-
   &__details {
     @apply flex flex-col gap-y-8 grow mt-24;
 
@@ -16,7 +8,7 @@
       @apply space-y-2;
       
       &__heading {
-        @apply block flex items-center gap-x-4;
+        @apply block space-x-4;
 
         .title {
           @apply text-4xl font-semibold;
@@ -40,10 +32,6 @@
 
 @media all and (max-width: 850px) {
   .title-component {
-    &__poster {
-      @apply shrink;
-    }
-
     &__details {
       @apply mt-0 self-center;
     }
@@ -52,10 +40,6 @@
 
 @media all and (max-width: 650px) {
   .title-component {
-    &__poster {
-      @apply max-w-[10rem];
-    }
-    
     &__details {
       .text {
         &__heading {
