@@ -24,6 +24,7 @@ function SummaryComponent() {
           <p className={styles.label}>Share</p>
           <div className={styles.share}>
             <input
+              id="share"
               value={window.location.origin + location.pathname}
               readOnly
             />
