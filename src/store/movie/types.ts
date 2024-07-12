@@ -26,7 +26,7 @@ export type MovieItem = {
   vote_count: number
 }
 
-export type MoviesListResponse = Pagination & {
+export type MovieListResponse = Pagination & {
   dates?: {
     maximum: string,
     minimum: string
@@ -123,16 +123,18 @@ export type AlternativeTitlesResponse = {
 export type MoviesState = {
   nowPlaying: MovieItem[],
   popular: MovieItem[],
-  upcoming: MovieItem[],
   topRated: MovieItem[],
+  upcoming: MovieItem[],
   details: MovieDetailsResponse,
   credits: MovieCreditsResponse,
   alternativeTitles: TitleItem[],
+  similar: MovieItem[],
   setNowPlaying: (data: MovieItem[]) => void,
   setPopular: (data: MovieItem[]) => void,
-  setUpcoming: (data: MovieItem[]) => void,
   setTopRated: (data: MovieItem[]) => void,
+  setUpcoming: (data: MovieItem[]) => void,
   setDetails: (data: MovieDetailsResponse) => void,
   setCredits: (data: MovieCreditsResponse) => void,
-  setAlternativeTitles: (data: TitleItem[]) => void
+  setAlternativeTitles: (data: TitleItem[]) => void,
+  setSimilar: (data: MovieItem[]) => void
 }

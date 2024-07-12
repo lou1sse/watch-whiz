@@ -8,6 +8,7 @@ import {
   getDetails,
   getNowPlaying,
   getPopular,
+  getSimilar,
   getTopRated,
   getUpcoming
 } from "./requests"
@@ -16,7 +17,8 @@ import {
   AlternativeTitlesResponse,
   CrewItem,
   MovieCreditsResponse,
-  MovieDetailsResponse
+  MovieDetailsResponse,
+  MovieListResponse
 } from "./types"
 
 function useNowPlaying() {
@@ -118,20 +120,25 @@ function useUpcoming() {
 
 function useDetails() {
   const { movie_id: movieId } = useParams()
+  const { updateResultsWithPosterUrls } = useCommonMethods()
   const {
     details,
     credits,
     alternativeTitles,
+    similar,
     setDetails,
     setCredits,
-    setAlternativeTitles
+    setAlternativeTitles,
+    setSimilar
   } = useMovieStore((state) => ({
     details: state.details,
     credits: state.credits,
     alternativeTitles: state.alternativeTitles,
+    similar: state.similar,
     setDetails: state.setDetails,
     setCredits: state.setCredits,
-    setAlternativeTitles: state.setAlternativeTitles
+    setAlternativeTitles: state.setAlternativeTitles,
+    setSimilar: state.setSimilar
   }))
 
   const queries = useQueries([
@@ -168,6 +175,16 @@ function useDetails() {
       onSuccess: (data: AlternativeTitlesResponse) => {
         setAlternativeTitles(data.titles)
       }
+    },
+    {
+      queryKey: ["similar", movieId],
+      queryFn: () => getSimilar(movieId as string),
+      enabled: !!movieId,
+      refetchOnMount: true,
+      onSuccess: (data: MovieListResponse) => {
+        const updatedResults = updateResultsWithPosterUrls(data.results)
+        setSimilar(updatedResults)
+      }
     }
   ])
 
@@ -177,6 +194,7 @@ function useDetails() {
     isLoading: isAlternativeTitlesLoading,
     error: alternativeTitlesError
   } = queries[2]
+  const { isLoading: isSimilarLoading, error: similarError } = queries[3]
 
   return {
     isDetailsLoading,
@@ -187,7 +205,10 @@ function useDetails() {
     creditsError,
     isAlternativeTitlesLoading,
     alternativeTitles,
-    alternativeTitlesError
+    alternativeTitlesError,
+    isSimilarLoading,
+    similar,
+    similarError
   }
 }
 

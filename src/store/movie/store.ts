@@ -15,6 +15,7 @@ const useMovieStore = create<MoviesState>((set) => ({
   details: {} as MovieDetailsResponse,
   credits: {} as MovieCreditsResponse,
   alternativeTitles: [] as TitleItem[],
+  similar: [] as MovieItem[],
 
   /* actions */
   setNowPlaying: (nowPlaying) => set({ nowPlaying }),
@@ -23,7 +24,8 @@ const useMovieStore = create<MoviesState>((set) => ({
   setTopRated: (topRated) => set({ topRated }),
   setDetails: (details) => set({ details }),
   setCredits: (credits) => set({ credits }),
-  setAlternativeTitles: (alternativeTitles) => set({ alternativeTitles })
+  setAlternativeTitles: (alternativeTitles) => set({ alternativeTitles }),
+  setSimilar: (similar) => set({ similar })
 }))
 
 export default useMovieStore

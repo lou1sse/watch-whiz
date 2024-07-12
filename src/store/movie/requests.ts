@@ -3,7 +3,7 @@ import {
   AlternativeTitlesResponse,
   MovieCreditsResponse,
   MovieDetailsResponse,
-  MoviesListResponse
+  MovieListResponse
 } from "./types"
 
 const PREFIX = "movie"
@@ -15,18 +15,19 @@ const ENDPOINTS = {
   Upcoming: `${PREFIX}/upcoming`,
   Details: (id: string) => `${PREFIX}/${id}`,
   Credits: (id: string) => `${PREFIX}/${id}/credits`,
-  AlternativeTitles: (id: string) => `${PREFIX}/${id}/alternative_titles`
+  AlternativeTitles: (id: string) => `${PREFIX}/${id}/alternative_titles`,
+  Similar: (id: string) => `${PREFIX}/${id}/similar`
 }
 
 function getNowPlaying() {
-  return generateRequest<MoviesListResponse>({
+  return generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.NowPlaying
   })
 }
 
 function getPopular() {
-  return generateRequest<MoviesListResponse>({
+  return generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Popular,
     params: { page: 2 }
@@ -34,14 +35,14 @@ function getPopular() {
 }
 
 function getTopRated() {
-  return generateRequest<MoviesListResponse>({
+  return generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.TopRated
   })
 }
 
 function getUpcoming() {
-  return generateRequest<MoviesListResponse>({
+  return generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Upcoming
   })
@@ -68,6 +69,13 @@ function getAlternativeTitles(id: string) {
   })
 }
 
+function getSimilar(id: string) {
+  return generateRequest<MovieListResponse>({
+    method: "get",
+    endpoint: ENDPOINTS.Similar(id)
+  })
+}
+
 export {
   getCredits,
   getDetails,
@@ -75,5 +83,6 @@ export {
   getPopular,
   getTopRated,
   getUpcoming,
-  getAlternativeTitles
+  getAlternativeTitles,
+  getSimilar
 }
