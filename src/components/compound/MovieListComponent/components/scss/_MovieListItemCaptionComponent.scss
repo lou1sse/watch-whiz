@@ -1,0 +1,9 @@
+.movie-list-item-caption-component {
+  &.overlay {
+    @apply absolute inset-0 bg-gradient-to-b from-transparent to-black/80 flex w-full h-full;
+
+    .caption {
+      @apply flex flex-col self-end p-4;
+    }
+  }
+}

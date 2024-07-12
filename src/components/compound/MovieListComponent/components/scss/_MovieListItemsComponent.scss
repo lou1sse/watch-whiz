@@ -1,0 +1,7 @@
+.movie-list-items-component {
+  @apply flex flex-wrap gap-3;
+
+  &.vertical {
+    @apply flex-col;
+  }
+}

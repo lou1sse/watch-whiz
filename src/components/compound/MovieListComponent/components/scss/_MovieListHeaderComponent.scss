@@ -1,0 +1,17 @@
+.movie-list-header-component {
+  @apply flex items-center justify-between gap-x-4 uppercase;
+
+  p {
+    &.title {
+      @apply font-semibold;
+    }
+  }
+
+  .action {
+    @apply flex items-center gap-x-1 text-xs;
+
+    svg {
+      @apply h-3 w-3 stroke-current stroke-2;
+    }
+  }
+}
