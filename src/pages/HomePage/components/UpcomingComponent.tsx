@@ -6,7 +6,7 @@ import styles from "./scss/styles.module.scss"
 function UpcomingComponent({ data }: { data: MovieItem[] }) {
   return (
     <MovieListComponent data={data}>
-      <MovieListComponent.Header title="Upcoming Component" />
+      <MovieListComponent.Header title="Upcoming" />
       <MovieListComponent.Items className={styles.upcomingComponent}>
         {({ movie }) => (
           <MovieListComponent.Item data={movie} height="200px" isBackdrop>
