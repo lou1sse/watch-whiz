@@ -1,0 +1,11 @@
+.dropdown-item-component {
+  @apply px-2 py-1 cursor-pointer;
+
+  &.disabled {
+    @apply uppercase tracking-wide text-[11px] bg-neutral-700 py-0 cursor-not-allowed;
+  }
+
+  &:not(.disabled):hover {
+    @apply bg-neutral-500 transition duration-500;
+  }
+}

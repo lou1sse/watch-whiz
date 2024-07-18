@@ -1,0 +1,7 @@
+.dropdown-items-component {
+  @apply absolute mt-2 shadow-sm rounded-md py-1 w-full z-50 max-h-40 overflow-y-auto border border-neutral-500 bg-neutral-600;
+
+  &:focus {
+    @apply outline-none;
+  }
+}
