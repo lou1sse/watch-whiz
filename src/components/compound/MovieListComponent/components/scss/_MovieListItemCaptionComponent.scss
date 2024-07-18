@@ -1,4 +1,6 @@
 .movie-list-item-caption-component {
+  @apply rounded-b-sm;
+  
   &.overlay {
     @apply absolute inset-0 bg-gradient-to-b from-transparent to-black/80 flex w-full h-full;
 

@@ -24,7 +24,7 @@ function MovieListItemCaptionComponent(props: Props) {
           <>
             <p>{data?.title}</p>
             {showReleaseDate && (
-              <p>{formatDate(data?.release_date, "YYYY")}</p>
+              <p>{formatDate(data?.release_date || "", "YYYY")}</p>
             )}
           </>
         )}
