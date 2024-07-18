@@ -1,13 +1,13 @@
 .movie-image-display-component {
-  @apply w-full relative;
+  @apply w-full relative rounded-sm;
 
   img {
-    @apply object-cover w-full h-full;
+    @apply object-cover w-full h-full rounded-sm;
   }
 
   .placeholder {
     @apply absolute inset-0 bg-neutral-800 border-2 border-neutral-600;
-    @apply flex flex-col justify-center items-center w-full h-full;
+    @apply flex flex-col justify-center items-center w-full h-full rounded-sm;
 
     &.overlay {
       @apply opacity-90 border-none;
