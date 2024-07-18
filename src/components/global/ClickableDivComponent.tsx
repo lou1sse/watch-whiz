@@ -25,7 +25,7 @@ const ClickableDivComponent = forwardRef<HTMLDivElement, Props>(
       <div
         ref={ref}
         role="button"
-        className={`cursor-pointer ${className}`}
+        className={className || "cursor-pointer"}
         onClick={onClick}
         onKeyDown={onKeyDown}
         tabIndex={0}
