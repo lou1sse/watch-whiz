@@ -7,11 +7,10 @@ const ENDPOINTS = {
   Movie: `${PREFIX}/movie/list`
 }
 
-function getMovieGenres() {
-  return generateRequest<GenreListResponse>({
+const getMovieGenres = () =>
+  generateRequest<GenreListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Movie
   })
-}
 
 export { getMovieGenres }

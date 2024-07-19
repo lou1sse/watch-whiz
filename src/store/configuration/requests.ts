@@ -8,18 +8,16 @@ const ENDPOINTS = {
   Languages: `${PREFIX}/languages`
 }
 
-function getCountries() {
-  return generateRequest<CountryItem[]>({
+const getCountries = () =>
+  generateRequest<CountryItem[]>({
     method: "get",
     endpoint: ENDPOINTS.Countries
   })
-}
 
-function getLanguages() {
-  return generateRequest<LanguageItem[]>({
+const getLanguages = () =>
+  generateRequest<LanguageItem[]>({
     method: "get",
     endpoint: ENDPOINTS.Languages
   })
-}
 
 export { getCountries, getLanguages }

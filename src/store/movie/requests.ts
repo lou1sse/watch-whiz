@@ -19,62 +19,54 @@ const ENDPOINTS = {
   Similar: (id: string) => `${PREFIX}/${id}/similar`
 }
 
-function getNowPlaying() {
-  return generateRequest<MovieListResponse>({
+const getNowPlaying = () =>
+  generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.NowPlaying
   })
-}
 
-function getPopular() {
-  return generateRequest<MovieListResponse>({
+const getPopular = () =>
+  generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Popular,
     params: { page: 2 }
   })
-}
 
-function getTopRated() {
-  return generateRequest<MovieListResponse>({
+const getTopRated = () =>
+  generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.TopRated
   })
-}
 
-function getUpcoming() {
-  return generateRequest<MovieListResponse>({
+const getUpcoming = () =>
+  generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Upcoming
   })
-}
 
-function getDetails(id: string) {
-  return generateRequest<MovieDetailsResponse>({
+const getDetails = (id: string) =>
+  generateRequest<MovieDetailsResponse>({
     method: "get",
     endpoint: ENDPOINTS.Details(id)
   })
-}
 
-function getCredits(id: string) {
-  return generateRequest<MovieCreditsResponse>({
+const getCredits = (id: string) =>
+  generateRequest<MovieCreditsResponse>({
     method: "get",
     endpoint: ENDPOINTS.Credits(id)
   })
-}
 
-function getAlternativeTitles(id: string) {
-  return generateRequest<AlternativeTitlesResponse>({
+const getAlternativeTitles = (id: string) =>
+  generateRequest<AlternativeTitlesResponse>({
     method: "get",
     endpoint: ENDPOINTS.AlternativeTitles(id)
   })
-}
 
-function getSimilar(id: string) {
-  return generateRequest<MovieListResponse>({
+const getSimilar = (id: string) =>
+  generateRequest<MovieListResponse>({
     method: "get",
     endpoint: ENDPOINTS.Similar(id)
   })
-}
 
 export {
   getCredits,

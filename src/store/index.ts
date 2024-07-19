@@ -1,3 +1,5 @@
 export * from "./configuration"
+export * from "./discover"
 export * from "./genre"
 export * from "./movie"
+export * from "./year"
