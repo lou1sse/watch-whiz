@@ -2,12 +2,12 @@ import { createContext, Dispatch, SetStateAction, useContext } from "react"
 
 export type DropdownItem =
   | string
-  | Record<string, string | number | undefined>
+  | Record<string, string | number | boolean | undefined>
 
 type DropdownContextType<T extends DropdownItem> = {
   data: T[] | undefined,
-  itemIdKey?: T extends string ? never : keyof T,
-  itemLabelKey?: T extends string ? never : keyof T,
+  itemIdKey: T extends string ? never : keyof T,
+  itemLabelKey: T extends string ? never : keyof T,
   selectedItem: T | undefined,
   setSelectedItem: Dispatch<SetStateAction<T | undefined>>
 }
