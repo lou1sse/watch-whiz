@@ -1,1 +1,3 @@
-export { default as HomePage } from "./HomePage"
+export * from "./HomePage"
+export * from "./MovieDetailsPage"
+export * from "./SearchPage"

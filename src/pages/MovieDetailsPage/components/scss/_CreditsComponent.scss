@@ -1,0 +1,69 @@
+.credits-component {
+  @apply flex flex-col gap-y-4 w-full;
+
+  &__description {
+    @apply space-y-2;
+
+    span {
+      @apply uppercase text-xs;
+    }
+  }
+
+  &__team {
+    @apply flex gap-2 flex-wrap;
+    
+    .person {
+      @apply relative cursor-pointer;
+
+      &__text {
+        @apply py-1 px-2 bg-neutral-700 text-neutral-300 rounded text-xs;
+
+        &:hover {
+          @apply bg-neutral-600 text-neutral-50;
+        }
+      }
+    }
+  }
+
+  &__details {
+    @apply space-y-4 text-sm;
+
+    .item {
+      @apply grid grid-cols-4 gap-4;
+
+      &__label {
+        @apply uppercase text-xs text-neutral-400;
+      }
+
+      &__content {
+        @apply col-span-3;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 600px) {
+  .credits-component {
+    &__details {
+      .item {
+        @apply flex flex-col gap-y-1;
+      }
+    }
+
+    &__team {
+      @apply flex flex-col gap-0 divide-y divide-neutral-600;
+      
+      .person {
+        @apply relative cursor-pointer;
+  
+        &__text {
+          @apply px-1 py-2 bg-transparent rounded text-sm flex justify-between;
+
+          &:hover {
+            @apply bg-transparent;
+          }
+        }
+      }
+    }
+  }
+}

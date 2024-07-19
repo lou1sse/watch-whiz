@@ -1,6 +1,6 @@
-import { map } from "lodash-es"
 import { FOOTER_NAV_LINKS, INFO_LINKS } from "@Config"
 import { WatchWhizWhite } from "@Logo"
+import { map } from "lodash-es"
 import styles from "./scss/styles.module.scss"
 
 function FooterComponent() {

@@ -1,0 +1,23 @@
+.home-page {
+  @apply flex flex-col gap-y-20 w-full;
+
+  &__content {
+    @apply grid grid-cols-11 gap-8;
+
+    .main {
+      @apply col-span-8 space-y-8;
+    }
+
+    .sidebar {
+      @apply col-span-3;
+    }
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .home-page {
+    &__content {
+      @apply flex flex-col gap-y-8;
+    }
+  }
+}

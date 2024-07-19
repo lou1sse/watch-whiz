@@ -1,0 +1,75 @@
+.title-component {
+  @apply col-span-8 flex gap-x-8;
+
+  &__details {
+    @apply flex flex-col gap-y-8 grow mt-24;
+
+    .text {
+      @apply space-y-2;
+      
+      &__heading {
+        @apply block space-x-4;
+
+        .title {
+          @apply text-4xl font-semibold;
+        }
+  
+        .date {
+          @apply text-xl border-b border-dotted cursor-pointer w-max;
+
+          &:hover {
+            @apply text-yellow-500 border-yellow-500;
+          }
+        }
+      }
+
+      &__director {
+        @apply flex gap-1;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 850px) {
+  .title-component {
+    &__details {
+      @apply mt-0 self-center;
+    }
+  }
+}
+
+@media all and (max-width: 650px) {
+  .title-component {
+    &__details {
+      .text {
+        &__heading {
+          @apply flex flex-col gap-y-2 items-start space-x-0;
+  
+          .title {
+            @apply text-2xl;
+          }
+    
+          .date {
+            @apply text-base;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 500px) {
+  .title-component {
+    &__details {
+      .text {
+        &__director {
+          @apply flex flex-col;
+          
+          span {
+            @apply text-xs uppercase;
+          } 
+        }
+      }
+    }
+  }
+}

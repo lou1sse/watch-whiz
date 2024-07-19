@@ -2,10 +2,10 @@
   @apply flex flex-col;
 
   .container {
-    @apply flex flex-col h-full w-full overflow-y-auto overflow-x-hidden;
+    @apply flex flex-col h-full w-full overflow-y-auto bg-neutral-900 text-white;
 
     main {
-      @apply p-8 flex self-center h-screen w-full max-w-[84rem] overflow-hidden;
+      @apply px-8 py-16 flex self-center h-full w-full max-w-[84rem];
     }
   }
 }

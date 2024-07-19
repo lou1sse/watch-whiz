@@ -1,0 +1,9 @@
+.popular-component {
+  @apply grid grid-cols-3 gap-3;
+}
+
+@media all and (max-width: 700px) {
+  .popular-component {
+    @apply grid-cols-2 text-sm;
+  }
+}

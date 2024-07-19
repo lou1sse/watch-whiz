@@ -8,11 +8,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "@Logo": "/src/assets/logo",
+      "@APIService": "/src/api",
+      "@CompoundComponents": "/src/components/compound",
       "@GlobalComponents": "/src/components/global",
       "@LayoutComponents": "/src/components/layout",
       "@Config": "/src/config",
-      "@Hooks": "/src/hooks",
-      "@Pages": "/src/pages"
+      "@Pages": "/src/pages",
+      "@Store": "/src/store",
+      "@Utilities": "/src/utils"
     }
   }
 })

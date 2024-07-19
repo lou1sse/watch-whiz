@@ -1,0 +1,38 @@
+.movie-details-page {
+  @apply w-full relative;
+
+  &__content {
+    @apply grid grid-cols-11 gap-8 relative;
+
+    &.with-margin {
+      @apply mt-[-15rem];
+    }
+    
+    .overview {
+      @apply col-span-8 flex flex-col gap-y-8 p-0 m-0;
+    }
+  }
+
+}
+
+@media all and (max-width: 1024px) {
+  .movie-details-page {
+    &__content {
+      @apply flex flex-col gap-y-8;
+
+      &.with-margin {
+        @apply mt-[-10rem];
+      }
+    }
+  }
+}
+
+@media all and (max-width: 425px) {
+  .movie-details-page {
+    &__content {
+      &.with-margin {
+        @apply mt-[-5rem];
+      }
+    }
+  }
+}

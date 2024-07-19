@@ -27,11 +27,14 @@
     "baseUrl": "./src",
     "paths": {
       "@Logo": ["assets/logo"],
+      "@APIService": ["api"],
+      "@CompoundComponents": ["components/compound"],
       "@GlobalComponents": ["components/global"],
       "@LayoutComponents": ["components/layout"],
       "@Config": ["config"],
-      "@Hooks": ["hooks"],
-      "@Pages": ["pages"]
+      "@Pages": ["pages"],
+      "@Store": ["store"],
+      "@Utilities": ["utils"]
     }
   },
   "include": [

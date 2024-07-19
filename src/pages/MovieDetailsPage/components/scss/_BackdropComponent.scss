@@ -1,0 +1,16 @@
+.backdrop-component {
+  @apply relative w-full max-h-[30rem] overflow-hidden;
+
+  img {
+    @apply object-cover max-h-full max-w-full;
+  }
+
+  &__faded-edges {
+    @apply absolute inset-0;
+    background: 
+      linear-gradient(to top, transparent, transparent, #171717),
+      linear-gradient(to right, transparent, transparent, #171717),
+      linear-gradient(to bottom, transparent, transparent, #171717),
+      linear-gradient(to left, transparent, transparent, #171717);
+  }
+}

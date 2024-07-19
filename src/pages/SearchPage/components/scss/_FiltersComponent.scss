@@ -1,0 +1,15 @@
+.filters-component {
+  @apply col-span-3 flex flex-col border border-neutral-600 rounded-md;
+
+  &__header {
+    @apply flex justify-end bg-neutral-600 px-4 py-2 rounded-t-md;
+
+    p {
+      @apply text-xs uppercase tracking-wide;
+    }
+  }
+
+  &__content {
+    @apply flex flex-col gap-y-6 p-4;
+  }
+}

@@ -3,12 +3,11 @@ import { useWindowSize } from "@uidotdev/usehooks"
 import styles from "./scss/styles.module.scss"
 
 function SearchComponent() {
-  const size = useWindowSize()
-  const windowWidth = size.width || 0
+  const { width } = useWindowSize()
 
   return (
     <div className={styles.searchComponent}>
-      {windowWidth > 1024 ? (
+      {(width as number) > 1024 ? (
         <div className={styles.searchComponent__box}>
           <input id="search" type="text" placeholder="Search" />
           <MagnifyingGlassIcon />

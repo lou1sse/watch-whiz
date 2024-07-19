@@ -1,0 +1,23 @@
+.genre-filter-component {
+  @apply space-y-4;
+
+  ul {
+    @apply flex flex-wrap gap-2 w-full text-[11px] uppercase tracking-wide;
+
+    li {
+      @apply px-2 py-1 flex items-center gap-x-1 bg-yellow-600 rounded-lg;
+
+      .remove-btn {
+        @apply rounded-full bg-transparent cursor-pointer;
+
+        svg {
+          @apply w-3 h-3 stroke-current stroke-1;
+        }
+
+        &:hover {
+          @apply bg-white text-yellow-600;
+        }
+      }
+    }
+  }
+}
