@@ -14,12 +14,11 @@ type Props<T extends DropdownItem> = PropsWithChildren<{
 }>
 
 function DropdownItemsComponent<T extends DropdownItem>(props: Props<T>) {
-  const { data, itemIdKey, selectedItem, setSelectedItem } =
-    useDropdownContext()
+  const { data, itemIdKey, setSelectedItem } = useDropdownContext()
   const {
     children,
     className,
-    returnKey = "id",
+    returnKey = itemIdKey,
     returnObject,
     value,
     onChangeValue
@@ -29,7 +28,7 @@ function DropdownItemsComponent<T extends DropdownItem>(props: Props<T>) {
     (val: T) => {
       const finalValue = find(data, (item) => {
         if (isObject(item) && isObject(val)) {
-          return item[itemIdKey || "id"] === val[returnKey]
+          return item[itemIdKey] === val[returnKey]
         }
         return item === val
       }) as T
@@ -45,14 +44,14 @@ function DropdownItemsComponent<T extends DropdownItem>(props: Props<T>) {
     }
   }, [value, findValue])
 
-  useEffect(() => {
-    if (onChangeValue && selectedItem) {
-      const returnValue = ((isObject(selectedItem) &&
-        (returnObject ? selectedItem : selectedItem[returnKey])) ||
-        selectedItem) as T
+  const onClickItem = (item: T) => {
+    if (onChangeValue) {
+      const returnValue = ((isObject(item) &&
+        (returnObject ? item : item[returnKey])) ||
+        item) as T
       onChangeValue(returnValue)
     }
-  }, [onChangeValue, selectedItem, returnKey, returnObject])
+  }
 
   return (
     <Transition
@@ -67,8 +66,12 @@ function DropdownItemsComponent<T extends DropdownItem>(props: Props<T>) {
       <MenuItems>
         <div className={className || styles.dropdownItemsComponent}>
           {children ||
-            map(data, (item, index) => (
-              <DropdownItemComponent key={index} data={item} />
+            map(data as T[], (item, index) => (
+              <DropdownItemComponent
+                key={index}
+                data={item}
+                onClick={() => onClickItem(item)}
+              />
             ))}
         </div>
       </MenuItems>
