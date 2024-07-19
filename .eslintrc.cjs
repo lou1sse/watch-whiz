@@ -23,6 +23,7 @@ module.exports = {
       { allowConstantExport: true }
     ],
     "react/display-name": 0,
+    "react-hooks/exhaustive-deps": 0,
     "react/react-in-jsx-scope": 0,
     "react/require-default-props": 0,
     "react/jsx-props-no-spreading": 0,
