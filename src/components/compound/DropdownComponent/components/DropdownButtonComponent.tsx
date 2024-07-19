@@ -1,35 +1,53 @@
 import { MenuButton } from "@headlessui/react"
+import { ChevronDownIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
 import { isObject } from "lodash-es"
 import { useMemo } from "react"
-import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { useDropdownContext } from "../DropdownContext"
 import styles from "./scss/styles.module.scss"
 
 type Props = {
   label?: string,
-  placeholder?: string
+  subLabel?: string,
+  placeholder?: string,
+  customValueDisplay?: string
 }
 
 function DropdownButtonComponent(props: Props) {
   const { selectedItem, itemLabelKey } = useDropdownContext()
-  const { label, placeholder = "Any" } = props
+  const {
+    label,
+    subLabel,
+    placeholder = "Select one",
+    customValueDisplay
+  } = props
 
   const valueDisplay = useMemo(
     () =>
-      (selectedItem && itemLabelKey && isObject(selectedItem)
+      customValueDisplay ||
+      ((selectedItem && itemLabelKey && isObject(selectedItem)
         ? selectedItem[itemLabelKey]
-        : selectedItem) as string,
-    [selectedItem, itemLabelKey]
+        : selectedItem) as string),
+    [customValueDisplay, selectedItem, itemLabelKey]
   )
 
   return (
     <MenuButton as="div" className="relative">
       <div className={styles.dropdownButtonComponent}>
-        {label && (
-          <p className={styles.dropdownButtonComponent__label}>{label}</p>
+        {(label || subLabel) && (
+          <div className={styles.dropdownButtonComponent__labels}>
+            <p>{label}</p>
+            <p>{subLabel}</p>
+          </div>
         )}
         <div className={styles.dropdownButtonComponent__container}>
-          <p>{valueDisplay || placeholder}</p>
+          <p
+            className={classNames("truncate", {
+              "text-neutral-400": !valueDisplay
+            })}
+          >
+            {valueDisplay || placeholder}
+          </p>
           <ChevronDownIcon />
         </div>
       </div>

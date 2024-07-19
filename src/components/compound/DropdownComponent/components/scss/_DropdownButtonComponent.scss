@@ -1,8 +1,8 @@
 .dropdown-button-component {
   @apply space-y-1;
 
-  &__label {
-    @apply ml-1 text-[11px] uppercase tracking-wide;
+  &__labels {
+    @apply px-1 flex justify-between gap-x-2 text-[11px] uppercase tracking-wide;
   }
 
   &__container {
