@@ -4,38 +4,41 @@ import {
   ClickableDivComponent
 } from "@GlobalComponents"
 import { XMarkIcon } from "@heroicons/react/24/solid"
-import { GenreItem, GenreQueries } from "@Store"
-import { filter, isEmpty, map } from "lodash-es"
-import { useEffect, useMemo, useState } from "react"
+import {
+  DiscoverMoviesPayload,
+  GenreItem,
+  GenreQueries,
+  useDiscoverStore
+} from "@Store"
+import { filter, isEmpty, map, some } from "lodash-es"
+import { useCallback } from "react"
 import styles from "./scss/styles.module.scss"
 
-function GenreFilterComponent() {
-  const { useMovieGenres } = GenreQueries
-  const { movieGenres } = useMovieGenres()
+type Props = {
+  value: GenreItem[] | undefined,
+  onChange: (value: DiscoverMoviesPayload) => void
+}
 
-  const [genresDisplay, setGenresDisplay] = useState<GenreItem[]>([])
+function GenreFilterComponent(props: Props) {
+  const { value, onChange } = props
+  const { movieGenres } = GenreQueries.useMovieGenres()
+  const moviesPayload = useDiscoverStore((state) => state.moviesPayload)
 
-  useEffect(() => {
-    if (isEmpty(genresDisplay) && movieGenres) {
-      const transformedMovieGenres = map(movieGenres, (item) => ({
-        ...item,
-        checked: false
-      }))
-      setGenresDisplay(transformedMovieGenres)
-    }
-  }, [movieGenres])
-
-  const selectedGenres = useMemo(
-    () => filter(genresDisplay, (item) => item.checked),
-    [genresDisplay]
+  const isSelected = useCallback(
+    (item: GenreItem) =>
+      some(value, (selectedItem) => selectedItem.id === item.id),
+    [value]
   )
 
-  const onChange = (genre: GenreItem, checked: boolean) => {
-    setGenresDisplay((prevGenres) =>
-      map(prevGenres, (item) =>
-        item.id === genre.id ? { ...item, checked } : item
-      )
-    )
+  const onChangeGenre = (genre: GenreItem) => {
+    const updatedGenres = isSelected(genre)
+      ? filter(value, (item) => item.id !== genre.id)
+      : [...(value || []), genre]
+
+    onChange({
+      ...moviesPayload,
+      with_genres: updatedGenres
+    })
   }
 
   return (
@@ -43,27 +46,27 @@ function GenreFilterComponent() {
       <DropdownComponent>
         <DropdownComponent.Button
           label="Genre"
-          customValueDisplay={map(selectedGenres, "name").join(", ")}
+          customValueDisplay={map(value, "name").join(", ")}
         />
         <DropdownComponent.Items>
-          {map(genresDisplay, (item) => (
+          {map(movieGenres, (item) => (
             <CheckboxComponent
               key={item.id}
               label={item.name}
-              checked={item.checked}
-              onChange={(checked) => onChange(item, checked)}
+              checked={isSelected(item)}
+              onChange={() => onChangeGenre(item)}
             />
           ))}
         </DropdownComponent.Items>
       </DropdownComponent>
 
-      {!isEmpty(selectedGenres) && (
+      {!isEmpty(value) && (
         <ul>
-          {map(selectedGenres, (item) => (
+          {map(value, (item) => (
             <li key={item.id}>
               {item.name}
               <ClickableDivComponent
-                onClick={() => onChange(item, false)}
+                onClick={() => onChangeGenre(item)}
                 className={styles.removeBtn}
               >
                 <XMarkIcon />
