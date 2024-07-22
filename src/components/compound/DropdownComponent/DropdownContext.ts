@@ -20,7 +20,9 @@ export function useDropdownContext() {
   const context = useContext(DropdownContext)
 
   if (!context) {
-    throw new Error("Some error message")
+    throw new Error(
+      "Please use DropdownComponent.* components as children to DropdownComponent."
+    )
   }
 
   return context
