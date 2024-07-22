@@ -18,13 +18,13 @@ function DropdownButtonComponent(props: Props) {
   const {
     label,
     subLabel,
-    placeholder = "Select one",
+    placeholder = "Any",
     customValueDisplay
   } = props
 
   const valueDisplay = useMemo(
     () =>
-      customValueDisplay ||
+      customValueDisplay ??
       ((selectedItem && itemLabelKey && isObject(selectedItem)
         ? selectedItem[itemLabelKey]
         : selectedItem) as string),
