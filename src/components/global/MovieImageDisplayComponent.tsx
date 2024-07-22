@@ -9,7 +9,8 @@ type Props = {
   width?: string,
   height?: string,
   showOverlay?: boolean,
-  showPlaceholder?: boolean
+  showPlaceholder?: boolean,
+  bordered?: boolean
 }
 
 function MovieImageDisplayComponent(props: Props) {
@@ -21,7 +22,8 @@ function MovieImageDisplayComponent(props: Props) {
     width,
     height = "270px",
     showOverlay,
-    showPlaceholder
+    showPlaceholder,
+    bordered
   } = props
 
   const renderPlaceholder = () => (
@@ -37,7 +39,9 @@ function MovieImageDisplayComponent(props: Props) {
 
   return (
     <div
-      className={styles.movieImageDisplayComponent}
+      className={classNames(styles.movieImageDisplayComponent, {
+        [styles.bordered]: bordered
+      })}
       style={{
         width,
         height,

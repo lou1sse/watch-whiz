@@ -1,13 +1,21 @@
 .movie-image-display-component {
-  @apply w-full relative rounded-sm;
+  @apply w-full relative rounded-md;
+
+  &.bordered {
+    @apply border-[0.25px] border-neutral-600 rounded-md;
+
+    img, .placeholder {
+      @apply rounded-md;
+    }
+  }
 
   img {
-    @apply object-cover w-full h-full rounded-sm;
+    @apply object-cover w-full h-full;
   }
 
   .placeholder {
     @apply absolute inset-0 bg-neutral-800 border-2 border-neutral-600;
-    @apply flex flex-col justify-center items-center w-full h-full rounded-sm;
+    @apply flex flex-col justify-center items-center w-full h-full;
 
     &.overlay {
       @apply opacity-90 border-none;
