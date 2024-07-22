@@ -1,0 +1,23 @@
+.button-component {
+  @apply px-4 py-2 rounded-md text-sm uppercase tracking-wide font-medium;
+
+  &:hover {
+    @apply transition duration-500;
+  }
+
+  &.primary {
+    @apply bg-yellow-600 hover:bg-yellow-700;
+  }
+
+  &.secondary {
+    @apply bg-neutral-600 hover:bg-neutral-700;
+  }
+
+  &.outline {
+    @apply bg-transparent text-yellow-600 border-2 border-yellow-600;
+
+    &:hover {
+      @apply text-yellow-700 border-yellow-700;
+    }
+  }
+}

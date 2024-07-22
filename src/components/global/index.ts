@@ -1,3 +1,4 @@
+export { default as ButtonComponent } from "./ButtonComponent"
 export { default as CheckboxComponent } from "./CheckboxComponent"
 export { default as ClickableDivComponent } from "./ClickableDivComponent"
 export { default as MovieImageDisplayComponent } from "./MovieImageDisplayComponent"
