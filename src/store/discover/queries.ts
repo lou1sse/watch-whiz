@@ -1,5 +1,5 @@
-import { formatDate } from "@Utilities"
-import { useQueries } from "react-query"
+import { formatDate, useCommonMethods } from "@Utilities"
+import { useQueries, useQuery } from "react-query"
 import { MovieListResponse } from "../movie/types"
 import { getMovies } from "./requests"
 import useDiscoverStore from "./store"
@@ -53,6 +53,49 @@ function useFirstAndLatestMovieYear() {
   }
 }
 
+function useMovies() {
+  const { updateResultsWithPosterUrls } = useCommonMethods()
+  const {
+    moviesPayload,
+    movies,
+    moviesPagination,
+    setMovies,
+    setMoviesPagination
+  } = useDiscoverStore((state) => ({
+    moviesPayload: state.moviesPayload,
+    movies: state.movies,
+    moviesPagination: state.moviesPagination,
+    setMovies: state.setMovies,
+    setMoviesPagination: state.setMoviesPagination
+  }))
+
+  const {
+    isLoading: isMoviesLoading,
+    error: moviesError,
+    refetch: discoverMoviesRequest
+  } = useQuery(
+    ["discover_movies", moviesPayload],
+    () => getMovies(moviesPayload),
+    {
+      onSuccess: (data) => {
+        const { results, page, total_pages, total_results } = data
+        const updatedResults = updateResultsWithPosterUrls(results)
+        setMoviesPagination({ page, total_pages, total_results })
+        setMovies(updatedResults)
+      }
+    }
+  )
+
+  return {
+    isMoviesLoading,
+    movies,
+    moviesPagination,
+    moviesError,
+    discoverMoviesRequest
+  }
+}
+
 export const DiscoverQueries = {
-  useFirstAndLatestMovieYear
+  useFirstAndLatestMovieYear,
+  useMovies
 }

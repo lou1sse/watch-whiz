@@ -1,5 +1,5 @@
 import { generateRequest } from "@APIService"
-import { identity, pickBy } from "lodash-es"
+import { identity, map, pickBy } from "lodash-es"
 import { MovieListResponse } from "../movie/types"
 import { DiscoverMoviesPayload } from "./types"
 
@@ -12,6 +12,11 @@ const ENDPOINTS = {
 const getMovies = (payload?: DiscoverMoviesPayload) => {
   const transformedPayload = {
     ...payload,
+    sort_by:
+      typeof payload?.sort_by === "string"
+        ? payload.sort_by
+        : payload?.sort_by?.payload,
+    with_genres: map(payload?.with_genres, "id").join(","),
     "primary_release_date.gte": payload?.primary_release_date_gte,
     "primary_release_date.lte": payload?.primary_release_date_lte,
     "release_date.gte": payload?.release_date_gte,
