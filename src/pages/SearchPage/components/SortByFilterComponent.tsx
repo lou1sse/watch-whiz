@@ -4,7 +4,6 @@ import { DiscoverMoviesPayload, useDiscoverStore } from "@Store"
 import { formatDate, getDateRange } from "@Utilities"
 import { map } from "lodash-es"
 import moment from "moment"
-import { useEffect, useState } from "react"
 
 type Props = {
   value: SortBy | undefined,
@@ -14,8 +13,6 @@ type Props = {
 function SortByFilterComponent(props: Props) {
   const { value, onChange } = props
   const moviesPayload = useDiscoverStore((state) => state.moviesPayload)
-
-  const [subLabel, setSubLabel] = useState<string>("")
 
   const getPopularityPayload = (
     id: string
@@ -66,15 +63,11 @@ function SortByFilterComponent(props: Props) {
     onChange(finalSortPayload)
   }
 
-  useEffect(() => {
-    setSubLabel(value?.section || "")
-  }, [value])
-
   return (
     <DropdownComponent>
       <DropdownComponent.Button
         label="Sort by"
-        subLabel={subLabel}
+        subLabel={value?.section || ""}
         customValueDisplay={value?.label || ""}
       />
       <DropdownComponent.Items>
