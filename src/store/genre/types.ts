@@ -1,7 +1,6 @@
 export type GenreItem = {
   id: number,
-  name: string,
-  checked: boolean
+  name: string
 }
 
 export type GenreListResponse = {
