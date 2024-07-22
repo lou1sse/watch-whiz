@@ -15,7 +15,7 @@ type Props<T extends DropdownItem> = PropsWithChildren<{
 
 function DropdownItemComponent<T extends DropdownItem>(props: Props<T>) {
   const { itemLabelKey, setSelectedItem } = useDropdownContext()
-  const { children, data, disabled, className, onClick, ...rest } = props
+  const { children, data, disabled, className, onClick } = props
 
   const dataDisplay = useMemo(
     () =>
@@ -45,7 +45,6 @@ function DropdownItemComponent<T extends DropdownItem>(props: Props<T>) {
           })
         }
         onClick={onClickItem}
-        {...rest}
       >
         {children || dataDisplay}
       </ClickableDivComponent>
